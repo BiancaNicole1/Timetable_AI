@@ -1,27 +1,44 @@
-Timetable Project AI
+A university timetable generator built using Constraint Satisfaction Problem (CSP) modeling, AC-3 arc consistency, and Backtracking search, with support for natural-language (NLP) constraints.
+The system automatically assigns courses, teachers, rooms, and time slots while respecting availability rules and user-defined restrictions.
+.
 
-An interactive application designed to help users explore and learn about tourist destinations through games, quizzes, and personalized recommendations. Built with Streamlit, the project integrates data preprocessing, automated question generation, and a hybrid recommendation engine.
 🚀 Features
-🧠 What am I thinking?
+🧠 CSP-Based Timetable Generation
 
-Guess the destination by answering questions about its attributes.
-The system narrows down possibilities using automatically generated decision-tree–optimized questions.
+Each course is modeled as a variable
 
-📚 Quiz Module
+Domains include all valid combinations of (day, hour, room)
 
-Test your knowledge about a specific destination with dynamically generated questions.
+Constraints limit scheduling based on teacher availability, room occupancy, group conflicts, and maximum hours per day
 
-✨ Personalized Recommendations
+📉 AC-3 Arc Consistency
 
-Receive destination suggestions based on your preferences using:
+Automatically reduces domains before search, significantly improving performance.
 
-Cosine similarity for numerical attributes
+🔍 Backtracking Search
 
-Categorical similarity for non-numerical attributes
+Finds a complete and conflict-free timetable by recursively assigning valid slots.
 
-Highlighting key differences between suggested and input destinations
+💬 Natural Language Constraints (NLP)
 
-❓ Question Generation
+Users can write rules such as:
 
-Questions are automatically generated based on the unique values of processed attributes.
-A Decision Tree classifier determines the optimal ordering to maximize information gain during the "What am I thinking?" game.
+“Professor X cannot teach after 12”
+
+“Room A101 is unavailable on Tuesday”
+
+“Do not schedule courses on Thursday after 14:00”
+
+“Teachers should have max 4 hours per day”
+
+The system interprets them using regex-based parsing and updates the CSV data accordingly.
+
+📄 Automatic Output
+
+Generates a human-readable timetable grouped by:
+
+Day
+
+Hour
+
+Room
